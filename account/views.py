@@ -17,8 +17,8 @@ from store.models import (
     CartItem,
     Order,
     Reservation,
-)
 
+)
 def create_cart(email):
     print('given email for creating a cart:', email)
     # get user that have given email

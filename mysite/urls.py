@@ -61,6 +61,7 @@ urlpatterns = [
     path('set_reservation_as_received/<str:reservation_id>/', set_reservation_as_received_view, name='set_reservation_as_received'),
     path('must_authenticate/', must_authenticate_view, name='must_authenticate'),
     path('social-auth/', include('social_django.urls', namespace='social')),
+    path('accounts/', include('allauth.urls')),
 
     path('cart/', cart_view, name='cart'),
     path('checkout/', checkout_view, name='checkout'),

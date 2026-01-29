@@ -48,9 +48,16 @@ INSTALLED_APPS = [
     'social_django',
 
     'personal',
-    'account',
+    'account.apps.AccountConfig',
     'store',
     'slider',
+    
+    'django.contrib.sites', 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+    'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +69,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -83,7 +92,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'account.Account'
+AUTH_USER_MODEL = 'my_account.Account'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -146,15 +155,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'database/media_cdn')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 
+SITE_ID = 1
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # social app custom settings
 AUTHENTICATION_BACKENDS = [
-    'social_core.backends.github.GithubOAuth2',
-    'django.contrib.auth.backends.ModelBackend'
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'home'
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'

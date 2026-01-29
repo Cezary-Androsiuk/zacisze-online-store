@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load socialaccount %}
 {% block content %}
 <div class="form-signin w-100 m-auto">
     <form class="form-singin" method="POST"> {% csrf_token %}
@@ -25,6 +26,11 @@
         <br />
 
         <button id="submit_login_button" class="btn btn-primary w-100 py-2" type="submit">Log in</button>
+    </form>
+    <br>
+    <form method="post" action="{% provider_login_url 'github' %}">
+        {% csrf_token %}
+        <button id="submit_login_button" class="btn btn-primary w-100 py-2" type="submit">Log in with GitHub</button>
     </form>
     <!-- <button class="btn btn-primary mb-2">
         <a href="{% url 'social:begin' 'github' %}">
